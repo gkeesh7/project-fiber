@@ -1,0 +1,13 @@
+{
+  "dpt_org":"dview",
+  "dpt_tenant":"nrt",
+  "dpt_namespace":"user",
+  "dpt_objectName":"users",
+  "phone_no":"9230999549",
+  "email_id":"kauts@dview.io",
+  "user_id":"1",
+  "name":"kauts",
+  "id":"3",
+  "created_at":"2022-12-01 01:00:00",
+  "updated_at":"2023-12-03 03:00:00"
+}
