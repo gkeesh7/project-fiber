@@ -6,13 +6,17 @@ import (
 	"github.com/segmentio/kafka-go"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func main() {
+
+	brokerList := os.Getenv("KAFKA_BROKER_LIST")
+
 	// Set up the Kafka producer
 	producer := kafka.NewWriter(kafka.WriterConfig{
-		Brokers:  []string{"localhost:9092"},
-		Topic:    "my-topic",
+		Brokers:  strings.Split(brokerList, ","),
+		Topic:    "test-topic",
 		Balancer: &kafka.LeastBytes{},
 	})
 	// Defer Close the producer
@@ -32,11 +36,16 @@ func main() {
 	}
 
 	// Send a message to Kafka
-	producer.WriteMessages(
+	err = producer.WriteMessages(
 		context.Background(),
 		kafka.Message{
 			Key:   []byte("key"),
 			Value: byteValue,
 		},
 	)
+	if err != nil {
+		fmt.Println(err.Error() + " This error happened")
+		return
+	}
+	fmt.Println("All good")
 }
